@@ -1,1 +1,1 @@
-# CherryTracker.ninja Artico
+# CherryTracker.ninja Artigo
