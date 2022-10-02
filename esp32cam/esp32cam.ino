@@ -1,21 +1,4 @@
-/****************************************************************************
- *   ESP32 Hacks (c) 2021 Marcio Teixeira                                   *
- *                                                                          *
- *   https://github.com/marciot/esp32-hacks                                 *
- *                                                                          *
- *   This program is free software: you can redistribute it and/or modify   *
- *   it under the terms of the GNU General Public License as published by   *
- *   the Free Software Foundation, either version 3 of the License, or      *
- *   (at your option) any later version.                                    *
- *                                                                          *
- *   This program is distributed in the hope that it will be useful,        *
- *   but WITHOUT ANY WARRANTY; without even the implied warranty of         *
- *   MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the          *
- *   GNU General Public License for more details.                           *
- *                                                                          *
- *   To view a copy of the GNU General Public License, go to the following  *
- *   location: <http://www.gnu.org/licenses/>.                              *
- ****************************************************************************/
+
 
 #include <SD_MMC.h>
 #include "esp_camera.h"
@@ -23,35 +6,35 @@
 
 // Pins for ESP32-CAM
 
-#define FLASH_PIN         4
+#define FLASH_PIN 4
 // Camera pins
-#define PWDN_GPIO_NUM     32
-#define RESET_GPIO_NUM    -1
-#define XCLK_GPIO_NUM      0
-#define SIOD_GPIO_NUM     26
-#define SIOC_GPIO_NUM     27
+#define PWDN_GPIO_NUM 32
+#define RESET_GPIO_NUM -1
+#define XCLK_GPIO_NUM 0
+#define SIOD_GPIO_NUM 26
+#define SIOC_GPIO_NUM 27
 
-#define Y9_GPIO_NUM       35
-#define Y8_GPIO_NUM       34
-#define Y7_GPIO_NUM       39
-#define Y6_GPIO_NUM       36
-#define Y5_GPIO_NUM       21
-#define Y4_GPIO_NUM       19
-#define Y3_GPIO_NUM       18
-#define Y2_GPIO_NUM        5
-#define VSYNC_GPIO_NUM    25
-#define HREF_GPIO_NUM     23
-#define PCLK_GPIO_NUM     22
+#define Y9_GPIO_NUM 35
+#define Y8_GPIO_NUM 34
+#define Y7_GPIO_NUM 39
+#define Y6_GPIO_NUM 36
+#define Y5_GPIO_NUM 21
+#define Y4_GPIO_NUM 19
+#define Y3_GPIO_NUM 18
+#define Y2_GPIO_NUM 5
+#define VSYNC_GPIO_NUM 25
+#define HREF_GPIO_NUM 23
+#define PCLK_GPIO_NUM 22
 
 typedef struct
 {
-    float latitude;
-    float longitude;
-    float altitude;
-    float velocidade;
-    int numeroSatelites;
-    char hora;
-    char data;
+  float latitude;
+  float longitude;
+  float altitude;
+  float velocidade;
+  int numeroSatelites;
+  char hora;
+  char data;
 } TPosicao_GPS;
 
 StaticJsonDocument<200> doc;
@@ -60,7 +43,8 @@ TPosicao_GPS posicao_gps;
 
 String filename = "";
 
-bool startMicroSD() {
+bool startMicroSD()
+{
   Serial.print("Starting microSD... ");
 
   // Pin 13 needs to be pulled-up
@@ -68,16 +52,20 @@ bool startMicroSD() {
   pinMode(13, OUTPUT);
   digitalWrite(13, HIGH);
 
-  if(SD_MMC.begin("/sdcard", true)) {
+  if (SD_MMC.begin("/sdcard", true))
+  {
     Serial.println("OKAY");
     return true;
-  } else {
+  }
+  else
+  {
     Serial.println("FAILED");
     return false;
   }
 }
 
-bool startCamera() {
+bool startCamera()
+{
   // Turn off the flash
   pinMode(FLASH_PIN, OUTPUT);
   digitalWrite(FLASH_PIN, LOW);
@@ -104,14 +92,17 @@ bool startCamera() {
   config.pin_reset = RESET_GPIO_NUM;
   config.xclk_freq_hz = 20000000;
   config.pixel_format = PIXFORMAT_JPEG;
-  
+
   // Set resolution based on whether we have extra memory
-  if(psramFound()){
+  if (psramFound())
+  {
     Serial.println("PSRAM found. Maximum XGA resolution supported.");
     config.frame_size = FRAMESIZE_XGA;
     config.jpeg_quality = 10;
     config.fb_count = 2;
-  } else {
+  }
+  else
+  {
     Serial.println("PSRAM not found. Maximum SVGA resolution supported.");
     config.frame_size = FRAMESIZE_SVGA;
     config.jpeg_quality = 12;
@@ -121,35 +112,42 @@ bool startCamera() {
   // Start the camera
   Serial.print("Starting camera... ");
   esp_err_t err = esp_camera_init(&config);
-  if (err != ESP_OK) {
+  if (err != ESP_OK)
+  {
     Serial.println("FAILED");
     return false;
-  } else {
+  }
+  else
+  {
     Serial.println("OKAY");
     return true;
   }
 }
 
-void takePhoto(String filename) { 
+void takePhoto(String filename)
+{
   // Take a photo and get the data
 
   camera_fb_t *fb = esp_camera_fb_get();
-  if (!fb) {
+  if (!fb)
+  {
     Serial.println("Unable to take a photo");
     return;
   }
 
   // Make sure it is a JPEG
-  if (fb->format != PIXFORMAT_JPEG) {
-     Serial.println("Capture format not JPEG");
-     esp_camera_fb_return(fb); // Return the photo data
-     return;
+  if (fb->format != PIXFORMAT_JPEG)
+  {
+    Serial.println("Capture format not JPEG");
+    esp_camera_fb_return(fb); // Return the photo data
+    return;
   }
 
   // Save the picture to the SD card
 
   File file = SD_MMC.open(filename.c_str(), "w");
-  if(file) {
+  if (file)
+  {
     Serial.println("Saving " + filename);
     file.write(fb->buf, fb->len);
     file.close();
@@ -159,7 +157,9 @@ void takePhoto(String filename) {
     delay(100);
     digitalWrite(FLASH_PIN, LOW);
     delay(500);
-  } else {
+  }
+  else
+  {
     Serial.println("Unable to write " + filename);
   }
 
@@ -167,11 +167,13 @@ void takePhoto(String filename) {
   esp_camera_fb_return(fb);
 }
 
-void serialRead() {
-    DeserializationError error = deserializeJson(doc, Serial.readString());
+void serialRead()
+{
+  DeserializationError error = deserializeJson(doc, Serial.readString());
 
   // Test if parsing succeeds.
-  if (error) {
+  if (error)
+  {
     Serial.print(F("deserializeJson() failed: "));
     Serial.println(error.f_str());
     return;
@@ -184,10 +186,10 @@ void serialRead() {
   posicao_gps.numeroSatelites = doc["numeroSatelites"];
   posicao_gps.data = doc["data"];
   posicao_gps.hora = doc["hora"];
-
 }
 
-void newFileName() {
+void newFileName()
+{
   unsigned long time;
   time = millis();
   String newName = "";
@@ -206,14 +208,14 @@ void newFileName() {
   newName.replace(".", "");
   filename += newName;
   filename += ".jpg";
-  
 }
 
-void setup() {
+void setup()
+{
   // Initialize the peripherals
   Serial.begin(115200);
-  while(!Serial) delay(100);
-  
+  while (!Serial)
+    delay(100);
 
   startMicroSD();
   startCamera();
@@ -221,7 +223,8 @@ void setup() {
   delay(5000); // Delay 5 seconds before first photo
 }
 
-void loop() {
+void loop()
+{
   // Keep a count of the number of photos we have taken
   static int number = 0;
   number++;
@@ -230,11 +233,10 @@ void loop() {
 
   // Construct a filename that looks like "/photo_0001.jpg"
   newFileName();
-  
-  
+
   takePhoto(filename);
 
   // Delay until the next photo
 
-  delay( 15);
+  delay(15);
 }
