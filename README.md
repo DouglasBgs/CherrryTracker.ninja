@@ -88,3 +88,7 @@
 > > > ##### 4.2 Diagrama de casos de uso.
 > > >
 > > > &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;![ESP32](imgs/caso_de_uso.png)
+>
+> ## 5 Considerações Finais
+>
+> ## 6 Considerações Finais6 Apêndices (evidências de Implementação)
