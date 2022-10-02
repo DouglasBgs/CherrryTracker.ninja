@@ -60,7 +60,31 @@
 > > > - Neste diagrama é possível observar a conexão entre os dispositivos, onde a bateria representada na imagem abaixo, deve ser a bateria do carro.
 > > >   &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;![ESP32](imgs/arquitetura.png)
 > >
-> > #### 4.1 Diagrama de atividade
+> > #### 4.2 Diagrama de atividade
 > >
 > > > - Neste diagrama é possível observarmos o fluxo de atividades que será realizada por cada hardware presente no sistema e como cada uma das atividades dependem uma da outra para o correto funcionamento do sistema.
 > > >   &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;![ESP32](imgs/atividade.png)
+> >
+> > #### 4.3 Casos de Uso
+> >
+> > > ##### 4.1 Descrição dos casos de uso
+> > >
+> > > > **Caso de uso 1:**
+> > > > Nome: Ligar Carro
+> > > > Atores: Usuário
+> > > > Prioridade: 3 essencial
+> > > > Pré-condições: Ter bateria no veículo.
+> > > > Fluxo do evento principal: O ator irá ligar o carro dando início a gravação dos dados
+> > > > Fluxo alternativo: Caso não seja obtidos dados do gps o programa não funcionará corretamente.
+> > > >
+> > > > **Caso de uso 2:**
+> > > > Nome: Extrair Dados
+> > > > Atores: Usuário
+> > > > Prioridade: 3 essencial
+> > > > Pré-condições: possuir dados no cartão SD.
+> > > > Fluxo do evento principal: O ator irá remover o cartão SD do dispositivo para posteriormente visualizar as informações contidas nele.
+> > > > Fluxo alternativo:
+> > >
+> > > ##### 4.2 Diagrama de casos de uso.
+> > >
+> > > &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;![ESP32](imgs/caso_de_uso.png)
