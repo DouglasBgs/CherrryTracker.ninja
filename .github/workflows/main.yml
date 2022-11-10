@@ -1,9 +1,13 @@
 name: ESP32 Build
 on:
   push:
-    branches: [master]
+    branches: [main]
+    paths-ignore:
+      - "imgs/**"
   pull_request:
-    branches: [master]
+    branches: [main]
+    paths-ignore:
+      - "imgs/**"
 
 env:
   ARDUINO_LIBRARY_ENABLE_UNSAFE_INSTALL: true
