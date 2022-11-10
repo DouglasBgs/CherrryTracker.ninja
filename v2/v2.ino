@@ -1,14 +1,13 @@
-#include "ESP32CamLib.h"
-
+#include <ESP32CamLib.h>
 
 void setup()
 {
   init_tasks();
 }
-
+int first;
 void loop()
 {
-  int first;
+
   if (first == 0 && millis() > 5000)
   {
     start_handler();
