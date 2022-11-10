@@ -1,0 +1,41 @@
+# This is the name of the workflow, visible on GitHub UI2
+name: ESP32 Build
+on:
+  # Triggers the workflow on push or pull request events but only for the main branch
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+
+# This is the list of jobs that will be run concurrently.
+# Since we use a build matrix, the actual number of jobs
+# started depends on how many configurations the matrix
+# will produce.
+env:
+  ARDUINO_LIBRARY_ENABLE_UNSAFE_INSTALL: true
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repo
+        uses: actions/checkout@v2
+      - name: Setup Arduino CLI
+        uses: arduino/setup-arduino-cli@v1
+      - run: |
+          arduino-cli core update-index --additional-urls https://dl.espressif.com/dl/package_esp32_index.json
+          arduino-cli core install esp32:esp32@1.0.5 --additional-urls https://dl.espressif.com/dl/package_esp32_index.json
+      - name: Install libraries
+        run: |
+          arduino-cli lib install --git-url https://github.com/DouglasBgs/ESP32CamLib.git
+          arduino-cli lib install "TinyGPSPlus@1.0.3"
+          arduino-cli lib install "ArduinoJson@6.19.4"
+          arduino-cli lib install "PubSubClient@2.8.0"
+          arduino-cli lib install "Functional-Vlpp@1.0.2"
+          ls /home/runner/Arduino/libraries/
+      - name: Compile Sketch
+        run: |
+          arduino-cli compile --fqbn esp32:esp32:nodemcu-32s ./esp32 
+          arduino-cli compile --fqbn esp32:esp32:nodemcu-32s ./esp32cam 
+          arduino-cli compile --fqbn esp32:esp32:nodemcu-32s ./esp32cam/v2

@@ -1,6 +1,8 @@
 # CherryTracker
 
 ---
+[![ESP32 Build](https://github.com/DouglasBgs/CherrryTracker.ninja/actions/workflows/build.yml/badge.svg)](https://github.com/DouglasBgs/CherrryTracker.ninja/actions/workflows/build.yml) [![License](https://img.shields.io/badge/license-MIT-red)](https://opensource.org/licenses/MIT)
+
 
 > ## 1 Introdução
 >
