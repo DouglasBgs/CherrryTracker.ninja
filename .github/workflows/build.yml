@@ -1,16 +1,10 @@
-# This is the name of the workflow, visible on GitHub UI2
 name: ESP32 Build
 on:
-  # Triggers the workflow on push or pull request events but only for the main branch
   push:
     branches: [main]
   pull_request:
     branches: [main]
 
-# This is the list of jobs that will be run concurrently.
-# Since we use a build matrix, the actual number of jobs
-# started depends on how many configurations the matrix
-# will produce.
 env:
   ARDUINO_LIBRARY_ENABLE_UNSAFE_INSTALL: true
 
