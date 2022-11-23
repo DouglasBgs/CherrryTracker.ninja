@@ -4,24 +4,12 @@
 #include <sstream>
 #include <string>
 
-/* Definições gerais */
-/* o módulo GPS da placa está ligado na serial 1 do ESP32 */
 #define BAUDRATE_SERIAL_GPS 9600
 #define LED_BUILTIN 2
 
-#define TEMPO_LEITURA_SERIAL_GPS 1500 // ms
-
-/* Baudrate da serial usada para debug (serial monitor) */
+#define TEMPO_LEITURA_SERIAL_GPS 2000
 #define BAUDRATE_SERIAL_DEBUG 115200
 
-/* Filas */
-/* Fila para armazenar posições GPS */
-QueueHandle_t xQueue_GPS;
-
-/* Semáforos */
-SemaphoreHandle_t xSerial_semaphore;
-
-/* Estrutura de dados de posição */
 typedef struct
 {
   float latitude;
@@ -37,19 +25,16 @@ typedef struct
   int ano;
 } TPosicao_GPS;
 
-/* Demais objetos e variáveis globais */
 TinyGPSPlus gps;
 
-StaticJsonDocument<200> doc;
-
-/* Protótipos das funções das tarefas */
+StaticJsonDocument<400> doc;
 
 void setup()
 {
-  /* Inicializa serial para debug */
-  Serial.begin(BAUDRATE_SERIAL_DEBUG);
 
-  /* Inicializa serial para comunicar com GPS */
+  Serial.begin(BAUDRATE_SERIAL_DEBUG);
+  while (!Serial)
+    continue;
   Serial2.begin(BAUDRATE_SERIAL_GPS);
 
   pinMode(LED_BUILTIN, OUTPUT);
@@ -70,24 +55,16 @@ static void convertJson(TPosicao_GPS posicao_gps)
   doc["hora"] = hora;
 
   serializeJson(doc, Serial);
+  Serial.println();
 }
 
-void loop()
+void GPSRead()
 {
-
   TPosicao_GPS posicao_gps;
-  unsigned long timestamp_start = 0;
 
-  /* Faz a leitura de todos os dados do GPS (por alguns milissegundos) */
-  timestamp_start = millis();
-  do
+  if (true) // if (gps.charsProcessed() > 10) quando gps estiver captando sinal
   {
-    while (Serial2.available())
-      gps.encode(Serial2.read());
-  } while ((millis() - timestamp_start) < TEMPO_LEITURA_SERIAL_GPS);
-  if (gps.charsProcessed() > 10)
-  {
-    /* Obtem e envia posição / localização para outras tasks usando uma fila*/
+    gps.encode(Serial2.read());
     posicao_gps.latitude = gps.location.lat();
     posicao_gps.longitude = gps.location.lng();
     posicao_gps.altitude = gps.altitude.kilometers();
@@ -101,13 +78,17 @@ void loop()
     posicao_gps.segundo = gps.time.second();
 
     digitalWrite(LED_BUILTIN, HIGH);
-    Serial.println();
     convertJson(posicao_gps);
   }
   else
   {
     digitalWrite(LED_BUILTIN, LOW);
   }
-  Serial.println();
-  Serial.println(Serial.readString());
+}
+
+void loop()
+{
+
+  GPSRead();
+  delay(TEMPO_LEITURA_SERIAL_GPS);
 }
