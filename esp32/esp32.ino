@@ -47,7 +47,7 @@ static void convertJson(TPosicao_GPS posicao_gps)
   doc["altitude"] = posicao_gps.altitude;
   doc["velocidade"] = posicao_gps.velocidade;
   doc["numeroSatelites"] = posicao_gps.numeroSatelites;
-  ss << posicao_gps.dia << "/" << posicao_gps.mes << "/" << posicao_gps.ano;
+  ss << posicao_gps.dia << "-" << posicao_gps.mes << "-" << posicao_gps.ano;
   std::string data = ss.str();
   doc["data"] = data;
   ss2 << posicao_gps.hora << ":" << posicao_gps.minuto << ":" << posicao_gps.segundo;
