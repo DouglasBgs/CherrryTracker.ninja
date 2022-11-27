@@ -1,11 +1,11 @@
 name: ESP32 Build
 on:
   push:
-    branches: [main]
+    branches: [master]
     paths-ignore:
       - "imgs/**"
   pull_request:
-    branches: [main]
+    branches: [master]
     paths-ignore:
       - "imgs/**"
 
