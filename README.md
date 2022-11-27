@@ -1,17 +1,47 @@
 # CherryTracker
 
----
 [![ESP32 Build](https://github.com/DouglasBgs/CherrryTracker.ninja/actions/workflows/main.yml/badge.svg?branch=master&event=push)](https://github.com/DouglasBgs/CherrryTracker.ninja/actions/workflows/main.yml) [![License](https://img.shields.io/badge/license-MIT-red)](https://opensource.org/licenses/MIT)
+##
+## Sumário
 
+1.  [**Introdução?**](#Introducao)
+	1.  [**Objetivo deste documento**](#Objetivo)
+	2.  [**Escopo dos Hardwares do protótipo**](#Hardwares)
+		1.  [**CherryTracker e seus principais componentes**](#componentes)
+		2.  [**Missão da aplicação**](#missao)
+	3.  [**Escopo dos Software do protótipo**](#software)
+2.  [**Descrição geral do Protótipo**](#descricao)
+3.  [**Requisitos do Sistema**](#requisitos)
+	1.  [**Requisitos não funcionais**](#nFuncional)
+	2.  [**Requisitos  funcionais**](#funcional)
+4. [**Artefatos da Aplicação**](#artefatos)
+	1. [**Diagrama de arquitetura**](#arquitetura)
+	2. [**Diagrama de atividade**](#atividade)
+	3. [**Casos de Uso**](#casosUso)
+		1. [**Descrição dos casos de uso**](#descCasosUso)
+		2. [**Diagrama de casos de uso**](#diagramaCasosUso)
+5. [**Considerações Finais**](#consideracao)
+
+##
+
+<div id='Introducao'/>
 
 > ## 1 Introdução
 >
-> > #### 1.1 Obejtivo deste documento
+
+<div id='Objetivo'/>
+
+
+> > #### 1.1 Objetivo deste documento
 > >
 > > > &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Neste documento são apresentado a especificação e evidências de implementação de um protótipo que é responsável por capturar dados e armazená los, este protótipo foi nomeado de **CherryTracker**. Neste projeto temos o objetivo de aplicar os conceitos de FDD (Feature Driven Development) para o desenvolvimento do software, além de boas práticas de programação.
-> >
+
+<div id='Hardwares'/>
+
 > > #### 1.2 Escopo dos Hardwares do protótipo
-> >
+
+<div id='componentes'/>
+
 > > > #### 1.2.1 CherryTracker e seus principais componentes
 > > >
 > > > > - &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; NEO-6M: Responsável por captar e processar os dados de GPS, esse hardware consegue se conectar com sinal GPS, por meio de sua antena e é facilmente configurável, um dos seus principais pontos negativos é a potência de sua antena que não é capaz de atuar em ambientes fechados (sem exposição ao céu).
@@ -23,18 +53,30 @@
 > > > > - &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; ESP32-CAM: Este dispositivo é responsável por gravar e armazenar todos os dados obtidos, pois conta com uma câmera e uma entrada para cartão micro SD.
 > > > >
 > > > > &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;![ESP32](imgs/ESP32-CAM.png)
-> > >
+
+<div id='missao'/>
+
 > > > #### 1.2.2 Missão da aplicação
 > > >
 > > > > &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Está aplicação tem o objetivo de facilitar o rastreamento de veículos, tendo em vista que existem muitas outras soluções que apenas gravam a localização do veículo em tempo real, esta é uma aplicação que além de localizar o veículo, também grava as imagens de todo o trajeto percorrido, facilitando a investigação de acidentes e outros problemas como desvio de rota e roubos, entre outros...
 > > > > &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Com estas imagens será possível saber exatamente o momento em que o veículo estava em determinada localização através de um mapa, que mostrará todo seu trajeto percorrido.
->
+
+<div id='software'/>
+
+> > #### 1.3 Escopo dos Softwares do protótipo
+
+<div id='descricao'/>
+
 > ## 2 Descrição geral do Protótipo
 >
 > > &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; O primeiro protótipo é um pequeno exemplo de funcionamento da aplicação, onde será feito a captura de dados do GPS e neste primeiro momento apenas a gravação de fotos no cartão SD, para que seja possível verificar se a integração entre todas as placas está ocorrendo como deveria.
->
+
+<div id='requisitos'/>
+
 > ## 3 Requisitos do Sistema
->
+
+<div id='nFuncional'/>
+
 > > #### 3.1 Requisitos não funcionais
 > >
 > > > - &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; RNF_001 O sistema não terá conexão coma a internet nem Bluetooth.
@@ -45,7 +87,9 @@
 > > > - &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; RNF_006 A câmera deve funcionar apenas com o carro ligado.
 > > > - &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; RNF_007 Plataforma de desenvolvimento: Arduino IDE.
 > > > - &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; RNF_008 Linguagem de desenvolvimento C++.
-> >
+
+<div id='funcional'/>
+
 > > #### 3.2 Requisitos funcionais
 > >
 > > > - &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; RF_001 O usuário não deve conseguir mexer no sistema.
@@ -54,22 +98,32 @@
 > > > - &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; RF_004 O sistema deve gravar os dados no cartão sd.
 > > > - &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; RF_005 O sistema deve ascender um led sempre que o armazenamento estiver cheio.
 > > > - &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; RF_006 O sistema deverá gravar a data e horário no nome do arquivo.
->
+
+<div id='artefatos'/>
+
 > ## 4 Artefatos da Aplicação
->
+
+<div id='arquitetura'/>
+
 > > #### 4.1 Diagrama de arquitetura
 > >
 > > > - Neste diagrama é possível observar a conexão entre os dispositivos, onde a bateria representada na imagem abaixo, deve ser a bateria do carro.
 > > >   &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;![ESP32](imgs/arquitetura.png)
-> >
+
+<div id='atividade'/>
+
 > > #### 4.2 Diagrama de atividade
 > >
 > > > - Neste diagrama é possível observarmos o fluxo de atividades que será realizada por cada hardware presente no sistema e como cada uma das atividades dependem uma da outra para o correto funcionamento do sistema.
 > > >   &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;![ESP32](imgs/atividade.png)
-> >
+
+<div id='casosUso'/>
+
 > > #### 4.3 Casos de Uso
-> >
-> > > ##### 4.1 Descrição dos casos de uso
+
+<div id='descCasosUso'/>
+
+> > > ##### 4.3.1 Descrição dos casos de uso
 > > >
 > > > > **Caso de uso 1:**
 > > > > Nome: Ligar Carro
@@ -86,11 +140,16 @@
 > > > > Pré-condições: possuir dados no cartão SD.
 > > > > Fluxo do evento principal: O ator irá remover o cartão SD do dispositivo para posteriormente visualizar as informações contidas nele.
 > > > > Fluxo alternativo:
-> > >
-> > > ##### 4.2 Diagrama de casos de uso.
+
+<div id='diagramaCasosUso'/>
+
+> > > ##### 4.3.2 Diagrama de casos de uso.
 > > >
 > > > &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;![ESP32](imgs/caso_de_uso.png)
 >
+
+<div id='consideracao'/>
+
 > ## 5 Considerações Finais
 >
-> ## 6 Considerações Finais6 Apêndices (evidências de Implementação)
+
