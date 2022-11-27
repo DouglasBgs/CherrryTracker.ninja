@@ -23,6 +23,9 @@
         1. [**Descrição dos casos de uso**](#descCasosUso)
         2. [**Diagrama de casos de uso**](#diagramaCasosUso)
 5.  [**Considerações Finais**](#consideracao)
+    1. [**Principais Dificuldades**](#dificuldades)
+    2. [**Aprendizados Obtidos**](#aprendizados)
+    3. [**RoadMap**](#roadmap)
 
 ##
 
@@ -166,4 +169,17 @@
 
 > ## 5 Considerações Finais
 >
-> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; ///
+> > #### 5.1 Principais Dificuldades
+
+<div id='dificuldades'/>
+
+> > &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; As principais dificuldades para desenvolver esse projeto foram o estudo e entendimento do funcionamento do hardware e a comunicação serial utilizando o protocolo UART. Outra grande dificuldade encontrada ao decorrer do projeto foi na geração de vídeo devido a limitação do hardware e também a não existência de bibliotecas para a gravação e manipulação de vídeo, demandando assim muito tempo para procurar referencias em outros projetos que utilizam a gravação de vídeo.
+> > &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Estas dificuldades citadas anteriormente também compartilham da dificuldade de aprender uma nova linguagem de programação de baixo nível, pois existem muitas diferenças se comparada a uma linguagem de alto nível(javascript), por ser uma linguagem orientada a objetos e ter o controle de memória, a utilização de polimorfismo e encapsulamento de dados, entre outros.
+
+> > #### 5.2 Aprendizados Obtidos
+
+<div id='aprendizados'/>
+
+> > #### 5.3 RoadMap
+
+<div id='roadmap'/>
