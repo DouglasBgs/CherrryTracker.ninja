@@ -6,46 +6,38 @@
 
 ## Sumário
 
-1.  [**Introdução**](#Introducao)
-    1.  [**Objetivo deste documento**](#Objetivo)
-    2.  [**Escopo dos Hardwares do protótipo**](#Hardwares)
-        1.  [**CherryTracker e seus principais componentes**](#componentes)
-        2.  [**Missão da aplicação**](#missao)
-    3.  [**Escopo dos Software do protótipo**](#software)
-2.  [**Descrição geral do Protótipo**](#descricao)
-3.  [**Requisitos do Sistema**](#requisitos)
-    1.  [**Requisitos funcionais**](#funcional)
-    2.  [**Requisitos não funcionais**](#nFuncional)
-4.  [**Artefatos da Aplicação**](#artefatos)
-    1.  [**Diagrama de arquitetura**](#arquitetura)
-    2.  [**Diagrama de atividade**](#atividade)
-    3.  [**Casos de Uso**](#casosUso)
-        1. [**Descrição dos casos de uso**](#descCasosUso)
-        2. [**Diagrama de casos de uso**](#diagramaCasosUso)
-5.  [**Considerações Finais**](#consideracao)
-    1. [**Principais Dificuldades**](#dificuldades)
-    2. [**Aprendizados Obtidos**](#aprendizados)
-    3. [**RoadMap**](#roadmap)
+1.  [**Introdução**](#1-introdução)
+    1.  [**Objetivo deste documento**](#11-objetivo-deste-documento)
+    2.  [**Escopo dos Hardwares do protótipo**](#12-escopo-dos-hardwares-do-protótipo)
+        1.  [**CherryTracker e seus principais componentes**](#121-cherrytracker-e-seus-principais-componentes)
+        2.  [**Missão da aplicação**](#122-missão-da-aplicação)
+    3.  [**Escopo dos Software do protótipo**](#13-escopo-do-software-do-protótipo)
+2.  [**Descrição geral do Protótipo**](#2-descrição-geral-do-protótipo)
+3.  [**Requisitos do Sistema**](#3-requisitos-do-sistema)
+    1.  [**Requisitos funcionais**](#31-requisitos-funcionais)
+    2.  [**Requisitos não funcionais**](#32-requisitos-não-funcionais)
+4.  [**Artefatos da Aplicação**](#4-artefatos-da-aplicação)
+    1.  [**Diagrama de arquitetura**](#41-diagrama-de-arquitetura)
+    2.  [**Diagrama de atividade**](#42-diagrama-de-atividade)
+    3.  [**Casos de Uso**](#43-casos-de-uso)
+        1. [**Descrição dos casos de uso**](#431-descrição-dos-casos-de-uso)
+        2. [**Diagrama de casos de uso**](#432-diagrama-de-casos-de-uso)
+5.  [**Considerações Finais**](#5-considerações-finais)
+    1. [**Principais Dificuldades**](#51-principais-dificuldades)
+    2. [**Aprendizados Obtidos**](#52-aprendizados-obtidos)
+    3. [**RoadMap**](#53-roadmap)
 
 ##
 
-<div id='Introducao'/>
-
 > ## 1 Introdução
-
-<div id='Objetivo'/>
-
+>
 > > #### 1.1 Objetivo deste documento
 > >
 > > > &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Neste documento são apresentado a especificação e evidências de implementação de um protótipo que é responsável por capturar dados de gps e imagens e armazená los, este protótipo foi nomeado de **CherryTracker**.
 > > > &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Neste projeto temos o objetivo de aplicar os conceitos de FDD (Feature Driven Development) para o desenvolvimento do software, além de boas práticas de programação como o Clean Code.
-
-<div id='Hardwares'/>
-
+> >
 > > #### 1.2 Escopo dos Hardwares do protótipo
-
-<div id='componentes'/>
-
+> >
 > > > #### 1.2.1 CherryTracker e seus principais componentes
 > > >
 > > > > - &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; **NEO-6M**: Responsável por captar e processar os dados de GPS, esse hardware consegue se conectar com sinal GPS, por meio de sua antena e é facilmente configurável, um dos seus principais pontos negativos é a potência de sua antena que não é capaz de atuar em ambientes fechados (sem exposição ao céu).
@@ -57,17 +49,13 @@
 > > > > - &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; **ESP32-CAM**: Este dispositivo é responsável por gravar e armazenar todos os dados obtidos, pois conta com uma câmera e uma entrada para cartão micro SD. Embora sua câmera tenha pouca qualidade de resolução é possível troca-lá por outro módulo com qualidade de imagem superior.
 > > > >
 > > > > &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;![ESP32](imgs/ESP32-CAM.png)
-
-<div id='missao'/>
-
+> > >
 > > > #### 1.2.2 Missão da aplicação
 > > >
 > > > > &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Está aplicação tem o objetivo de facilitar o rastreamento de veículos, tendo em vista que existem muitas outras soluções que apenas gravam a localização do veículo em tempo real, esta é uma aplicação que além de localizar o veículo, também grava as imagens de todo o trajeto percorrido, facilitando a investigação de acidentes e outros problemas como desvio de rota e roubos, entre outros...
 > > > > &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Com estas imagens será possível saber exatamente o momento em que o veículo estava em determinada localização através de um mapa, que mostrará todo seu trajeto percorrido.
 > > > > &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; A aplicação não deve ficar limitada a estas funcionalidades, novas atualizações podem trazer integração com a internet ou até mesmo Bluetooth, facilitando a integração com o sistema web.
-
-<div id='software'/>
-
+> >
 > > #### 1.3 Escopo do Software do protótipo
 > >
 > > > &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Utilizadas a linguagem **c++** para o desenvolvimento deste projeto, embora o hardware permita a utilização da linguagem **python** para o seu desenvolvimento, optamos por utilizar c++ devido a sua grande gama de bibliotecas disponíveis para hardwares. As principais bibliotecas utilizadas neste projeto estão listadas abaixo:
@@ -81,21 +69,15 @@
 > > >   - Biblioteca criada **exclusivamente** para este projeto, com o objetivo de gerenciar a filmagem e armazenamento do arquivo no cartão SD. Esta biblioteca foi desenvolvida a partir da necessidade e dificuldade de gerar e gravar vídeos utilizando linguagens de baixo nível.
 > > >
 > > > &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Para garantir que o código esteja funcionando corretamente foram implementados um workflow que garante o total funcionamento do código, pois nele é feito o build da aplicação e também faz a analise do código (lint).
-
-<div id='descricao'/>
-
+>
 > ## 2 Descrição geral do Protótipo
 >
 > > &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; O primeiro protótipo é um pequeno exemplo de funcionamento da aplicação, onde será feito a captura de dados do GPS e neste primeiro momento apenas a gravação de fotos no cartão SD, para que seja possível verificar se a integração entre todas as placas está ocorrendo como deveria.
 > >
 > > &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; O segundo protótipo contará com a captura dos dados GPS como o primeiro protótipo porém contara com a gravação e armazenamento de vídeo.
-
-<div id='requisitos'/>
-
+>
 > ## 3 Requisitos do Sistema
-
-<div id='funcional'/>
-
+>
 > > #### 3.1 Requisitos funcionais
 > >
 > > > - &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; RF_001 O usuário não deve conseguir mexer no sistema.
@@ -104,9 +86,7 @@
 > > > - &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; RF_004 O sistema deve gravar os dados no cartão sd.
 > > > - &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; RF_005 O sistema deve ascender um led sempre que o armazenamento estiver cheio.
 > > > - &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; RF_006 O sistema deverá gravar a data e horário no nome do arquivo.
-
-<div id='nFuncional'/>
-
+> >
 > > #### 3.2 Requisitos não funcionais
 > >
 > > > - &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; RNF_001 O sistema não terá conexão coma a internet nem Bluetooth.
@@ -117,31 +97,21 @@
 > > > - &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; RNF_006 A câmera deve funcionar apenas com o veículo ligado.
 > > > - &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; RNF_007 Plataforma de desenvolvimento: Arduino IDE.
 > > > - &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; RNF_008 Linguagem de desenvolvimento C++.
-
-<div id='artefatos'/>
-
+>
 > ## 4 Artefatos da Aplicação
-
-<div id='arquitetura'/>
-
+>
 > > #### 4.1 Diagrama de arquitetura
 > >
 > > > - Neste diagrama é possível observar a conexão entre os dispositivos, onde a bateria representada na imagem abaixo deve ser a ligação com o sistema de bateria do veículo.
 > > >   &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;![ESP32](imgs/arquitetura.png)
-
-<div id='atividade'/>
-
+> >
 > > #### 4.2 Diagrama de atividade
 > >
 > > > - Neste diagrama é possível observarmos o fluxo de atividades que será realizada por cada hardware presente no sistema e como cada uma das atividades dependem uma da outra para o correto funcionamento do sistema.
 > > >   &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;![ESP32](imgs/atividade.png)
-
-<div id='casosUso'/>
-
+> >
 > > #### 4.3 Casos de Uso
-
-<div id='descCasosUso'/>
-
+> >
 > > > ##### 4.3.1 Descrição dos casos de uso
 > > >
 > > > > **Caso de uso 1:**
@@ -158,28 +128,22 @@
 > > > > Prioridade: 3 essencial
 > > > > Pré-condições: possuir dados no cartão SD.
 > > > > Fluxo do evento principal: O ator irá remover o cartão SD do dispositivo para posteriormente visualizar as informações contidas nele.
-
-<div id='diagramaCasosUso'/>
-
+> > >
 > > > ##### 4.3.2 Diagrama de casos de uso.
 > > >
 > > > &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;![ESP32](imgs/caso_de_uso.png)
-
-<div id='consideracao'/>
-
+>
 > ## 5 Considerações Finais
 >
 > > #### 5.1 Principais Dificuldades
-
-<div id='dificuldades'/>
-
-> > &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; As principais dificuldades para desenvolver esse projeto foram o estudo e entendimento do funcionamento do hardware e a comunicação serial utilizando o protocolo UART. Outra grande dificuldade encontrada ao decorrer do projeto foi na geração de vídeo devido a limitação do hardware e também a não existência de bibliotecas para a gravação e manipulação de vídeo, demandando assim muito tempo para procurar referencias em outros projetos que utilizam a gravação de vídeo.
-> > &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Estas dificuldades citadas anteriormente também compartilham da dificuldade de aprender uma nova linguagem de programação de baixo nível, pois existem muitas diferenças se comparada a uma linguagem de alto nível(javascript), por ser uma linguagem orientada a objetos e ter o controle de memória, a utilização de polimorfismo e encapsulamento de dados, entre outros.
-
+> >
+> > > &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; As principais dificuldades para desenvolver esse projeto foram o estudo e entendimento do funcionamento do hardware e a comunicação serial utilizando o protocolo UART. Outra grande dificuldade encontrada ao decorrer do projeto foi na geração de vídeo devido a limitação do hardware e também a não existência de bibliotecas para a gravação e manipulação de vídeo, demandando assim muito tempo para procurar referencias em outros projetos que utilizam a gravação de vídeo.
+> > > &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Estas dificuldades citadas anteriormente também compartilham da dificuldade de aprender uma nova linguagem de programação de baixo nível, pois existem muitas diferenças se comparada a uma linguagem de alto nível(javascript), por ser uma linguagem orientada a objetos e ter o controle de memória, a utilização de polimorfismo e encapsulamento de dados, entre outros.
+> >
 > > #### 5.2 Aprendizados Obtidos
-
-<div id='aprendizados'/>
-
+> >
+> > > //
+> >
 > > #### 5.3 RoadMap
-
-<div id='roadmap'/>
+> >
+> > > ///
