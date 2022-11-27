@@ -35,7 +35,8 @@ jobs:
       - name: Spell check 
         uses: codespell-project/actions-codespell@master
         with:
-           skip: .vscode,imgs
+          check_hidden: false
+          skip: .vscode,imgs,README,.github,.gitignore
       - name: Compile Sketch
         run: |
           arduino-cli compile --fqbn esp32:esp32:nodemcu-32s ./esp32 
