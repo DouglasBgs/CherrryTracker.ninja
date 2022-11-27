@@ -6,7 +6,7 @@
 
 ## Sumário
 
-1.  [**Introdução?**](#Introducao)
+1.  [**Introdução**](#Introducao)
     1.  [**Objetivo deste documento**](#Objetivo)
     2.  [**Escopo dos Hardwares do protótipo**](#Hardwares)
         1.  [**CherryTracker e seus principais componentes**](#componentes)
@@ -65,22 +65,26 @@
 
 <div id='software'/>
 
-> > #### 1.3 Escopo dos Softwares do protótipo
+> > #### 1.3 Escopo do Software do protótipo
 > >
-> > > Utilizadas a linguagem **c++** para o desenvolvimento deste projeto, embora o hardware permita a utilização da linguagem **python** para o seu desenvolvimento, optamos por utilizar c++ devido a sua grande gama de bibliotecas disponíveis para hardwares. As principais bibliotecas utilizadas neste projeto estão listadas abaixo:
+> > > &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Utilizadas a linguagem **c++** para o desenvolvimento deste projeto, embora o hardware permita a utilização da linguagem **python** para o seu desenvolvimento, optamos por utilizar c++ devido a sua grande gama de bibliotecas disponíveis para hardwares. As principais bibliotecas utilizadas neste projeto estão listadas abaixo:
 > > >
 > > > - [ArduinoJson](https://arduinojson.org/)
 > > >   - Responsável por padronizar a comunicação serial entre as duas placas (esp32 e esp32cam).
 > > > - [TinyGPS++](http://arduiniana.org/libraries/tinygpsplus/)
 > > >   - Responsável por realizar a leitura e transformação dos dados capturados pelo gps (NEO-6M) e facilitar a manipulação dos dados.
 > > > - [ESP32CamLib](https://github.com/DouglasBgs/ESP32CamLib)
+> > >
 > > >   - Biblioteca criada **exclusivamente** para este projeto, com o objetivo de gerenciar a filmagem e armazenamento do arquivo no cartão SD. Esta biblioteca foi desenvolvida a partir da necessidade e dificuldade de gerar e gravar vídeos utilizando linguagens de baixo nível.
+> > >
+> > > &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Para garantir que o código esteja funcionando corretamente foram implementados um workflow que garante o total funcionamento do código, pois nele é feito o build da aplicação e também faz a analise do código (lint).
 
 <div id='descricao'/>
 
 > ## 2 Descrição geral do Protótipo
 >
 > > &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; O primeiro protótipo é um pequeno exemplo de funcionamento da aplicação, onde será feito a captura de dados do GPS e neste primeiro momento apenas a gravação de fotos no cartão SD, para que seja possível verificar se a integração entre todas as placas está ocorrendo como deveria.
+> >
 > > &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; O segundo protótipo contará com a captura dos dados GPS como o primeiro protótipo porém contara com a gravação e armazenamento de vídeo.
 
 <div id='requisitos'/>
@@ -161,3 +165,5 @@
 <div id='consideracao'/>
 
 > ## 5 Considerações Finais
+>
+> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; ///
