@@ -32,6 +32,8 @@ jobs:
           arduino-cli lib install "PubSubClient@2.8.0"
           arduino-cli lib install "Functional-Vlpp@1.0.2"
           ls /home/runner/Arduino/libraries/
+      - name: Spell check 
+        uses: arduino/actions/libraries/spell-check@master
       - name: Compile Sketch
         run: |
           arduino-cli compile --fqbn esp32:esp32:nodemcu-32s ./esp32 
