@@ -34,6 +34,7 @@
 > > #### 1.1 Objetivo deste documento
 > >
 > > > &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Neste documento são apresentado a especificação e evidências de implementação de um protótipo que é responsável por capturar dados de gps e imagens e armazená los, este protótipo foi nomeado de **CherryTracker**.
+> > >
 > > > &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Neste projeto temos o objetivo de aplicar os conceitos de FDD (Feature Driven Development) para o desenvolvimento do software, além de boas práticas de programação como o Clean Code.
 > >
 > > #### 1.2 Escopo dos Hardwares do protótipo
@@ -53,7 +54,9 @@
 > > > #### 1.2.2 Missão da aplicação
 > > >
 > > > > &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Está aplicação tem o objetivo de facilitar o rastreamento de veículos, tendo em vista que existem muitas outras soluções que apenas gravam a localização do veículo em tempo real, esta é uma aplicação que além de localizar o veículo, também grava as imagens de todo o trajeto percorrido, facilitando a investigação de acidentes e outros problemas como desvio de rota e roubos, entre outros...
+> > > >
 > > > > &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Com estas imagens será possível saber exatamente o momento em que o veículo estava em determinada localização através de um mapa, que mostrará todo seu trajeto percorrido.
+> > > >
 > > > > &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; A aplicação não deve ficar limitada a estas funcionalidades, novas atualizações podem trazer integração com a internet ou até mesmo Bluetooth, facilitando a integração com o sistema web.
 > >
 > > #### 1.3 Escopo do Software do protótipo
@@ -138,12 +141,17 @@
 > > #### 5.1 Principais Dificuldades
 > >
 > > > &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; As principais dificuldades para desenvolver esse projeto foram o estudo e entendimento do funcionamento do hardware e a comunicação serial utilizando o protocolo UART. Outra grande dificuldade encontrada ao decorrer do projeto foi na geração de vídeo devido a limitação do hardware e também a não existência de bibliotecas para a gravação e manipulação de vídeo, demandando assim muito tempo para procurar referencias em outros projetos que utilizam a gravação de vídeo.
+> > >
 > > > &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Estas dificuldades citadas anteriormente também compartilham da dificuldade de aprender uma nova linguagem de programação de baixo nível, pois existem muitas diferenças se comparada a uma linguagem de alto nível(javascript), por ser uma linguagem orientada a objetos e ter o controle de memória, a utilização de polimorfismo e encapsulamento de dados, entre outros.
 > >
 > > #### 5.2 Aprendizados Obtidos
 > >
-> > > //
+> > > &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Embora este projeto tenha sido muito desafiador em vários aspectos, muitos destes desafios foram concluídos através dos aprendizados obtidos durante o desenvolvimento deste projeto, com isso destaca-se os principais aprendizados obtidos, como a utilização do _github actions_, que é uma ferramenta muito poderosa para a geração e controle de workflows, possibilitando a implementação de CI/CD entre outras atividades.
+> > > &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; O manuseio e instalação de microcontroladores utilizados no decorrer do processo de desenvolvimento, tanto no que diz respeito a ligações entre hardwares quanto a comunicação entre os softwares desenvolvidos ou utilizados pelo sistema.
 > >
 > > #### 5.3 RoadMap
 > >
-> > > ///
+> > > - Criar a integração do sistema utilizando WiFi.
+> > > - Modularizar o sistema criando determinadas funcionalidades extras como, como a armazenagem de dados na nuvem.
+> > > - Acompanhamento dos dados em tempo real.
+> > > - limitação dos últimos videos disponíveis para visualizar de acordo com a licença obtida.
