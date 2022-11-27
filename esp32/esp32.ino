@@ -1,5 +1,4 @@
 #include <TinyGPS++.h>
-#include <PubSubClient.h>
 #include <ArduinoJson.h>
 #include <sstream>
 #include <string>
