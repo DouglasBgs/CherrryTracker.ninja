@@ -88,7 +88,6 @@ void GPSRead()
 
 void loop()
 {
-
   GPSRead();
   delay(TEMPO_LEITURA_SERIAL_GPS);
 }

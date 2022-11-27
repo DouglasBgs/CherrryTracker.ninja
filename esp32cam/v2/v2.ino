@@ -7,8 +7,6 @@
 #define BAUDRATE_SERIAL_DEBUG 115200
 #define TEMPO_LEITURA_SERIAL 1000
 
-
-
 int firstTime;
 long randomNumber;
 char jsonName[200];
@@ -39,8 +37,7 @@ void setup()
 void CriarNomeArquivo()
 {
   randomNumber = rand() + millis();
-  sprintf(fileName, "cherrytracker%d", randomNumber );
-  
+  sprintf(fileName, "cherrytracker%d", randomNumber);
 }
 
 void iniciaGravacao()
@@ -50,7 +47,7 @@ void iniciaGravacao()
   {
     readJson();
     Serial.println("Iniciando a gravação");
-    CriarNomeArquivo(); 
+    CriarNomeArquivo();
     start_handler(fileName);
     sprintf(jsonName, "/%s.json", fileName);
     JSONfile = SD_MMC.open(jsonName, FILE_WRITE);
@@ -74,7 +71,7 @@ void finalizaGravacao()
 
 void inicio()
 {
-  
+
   while (true)
   {
     iniciaGravacao();
