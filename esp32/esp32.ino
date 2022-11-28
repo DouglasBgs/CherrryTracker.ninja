@@ -9,7 +9,7 @@
 #define TEMPO_LEITURA_SERIAL_GPS 2000
 #define BAUDRATE_SERIAL_DEBUG 115200
 
-typedef struct
+typedef struct TPosicao_GPS
 {
   float latitude;
   float longitude;
@@ -22,39 +22,45 @@ typedef struct
   int dia;
   int mes;
   int ano;
-} TPosicao_GPS;
+};
 
 TinyGPSPlus gps;
 
 StaticJsonDocument<400> doc;
 
-void setup()
+std::stringstream ss_data, ss_hora;
+std::string data, hora;
+
+void castToSerial();
 {
-
-  Serial.begin(BAUDRATE_SERIAL_DEBUG);
-  while (!Serial)
-    continue;
-  Serial2.begin(BAUDRATE_SERIAL_GPS);
-
-  pinMode(LED_BUILTIN, OUTPUT);
+  serializeJson(doc, Serial);
+  Serial.println();
 }
-static void convertJson(TPosicao_GPS posicao_gps)
+
+convertDate()
 {
-  std::stringstream ss, ss2;
+  ss_data << posicao_gps.dia << "-" << posicao_gps.mes << "-" << posicao_gps.ano;
+  data = ss_data.str();
+}
+
+convertHour()
+{
+  ss_hora << posicao_gps.hora << ":" << posicao_gps.minuto << ":" << posicao_gps.segundo;
+  hora = ss_hora.str();
+}
+static void convertToJson(TPosicao_GPS posicao_gps)
+{
   doc["latitude"] = posicao_gps.latitude;
   doc["longitude"] = posicao_gps.longitude;
   doc["altitude"] = posicao_gps.altitude;
   doc["velocidade"] = posicao_gps.velocidade;
   doc["numeroSatelites"] = posicao_gps.numeroSatelites;
-  ss << posicao_gps.dia << "-" << posicao_gps.mes << "-" << posicao_gps.ano;
-  std::string data = ss.str();
+  convertDate();
   doc["data"] = data;
-  ss2 << posicao_gps.hora << ":" << posicao_gps.minuto << ":" << posicao_gps.segundo;
-  std::string hora = ss2.str();
+  convertHour();
   doc["hora"] = hora;
 
-  serializeJson(doc, Serial);
-  Serial.println();
+  castToSerial();
 }
 
 void GPSRead()
@@ -77,12 +83,23 @@ void GPSRead()
     posicao_gps.segundo = gps.time.second();
 
     digitalWrite(LED_BUILTIN, HIGH);
-    convertJson(posicao_gps);
+    convertToJson(posicao_gps);
   }
   else
   {
     digitalWrite(LED_BUILTIN, LOW);
   }
+}
+
+void setup()
+{
+
+  Serial.begin(BAUDRATE_SERIAL_DEBUG);
+  while (!Serial)
+    continue;
+  Serial2.begin(BAUDRATE_SERIAL_GPS);
+
+  pinMode(LED_BUILTIN, OUTPUT);
 }
 
 void loop()
