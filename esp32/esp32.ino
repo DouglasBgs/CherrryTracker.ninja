@@ -28,22 +28,24 @@ TinyGPSPlus gps;
 
 StaticJsonDocument<400> doc;
 
+TPosicao_GPS posicao_gps;
+
 std::stringstream ss_data, ss_hora;
 std::string data, hora;
 
-void castToSerial();
+void castToSerial()
 {
   serializeJson(doc, Serial);
   Serial.println();
 }
 
-convertDate()
+void convertDate()
 {
   ss_data << posicao_gps.dia << "-" << posicao_gps.mes << "-" << posicao_gps.ano;
   data = ss_data.str();
 }
 
-convertHour()
+ void convertHour()
 {
   ss_hora << posicao_gps.hora << ":" << posicao_gps.minuto << ":" << posicao_gps.segundo;
   hora = ss_hora.str();
@@ -65,8 +67,7 @@ static void convertToJson(TPosicao_GPS posicao_gps)
 
 void GPSRead()
 {
-  TPosicao_GPS posicao_gps;
-
+  
   if (true) // if (gps.charsProcessed() > 10) quando gps estiver captando sinal
   {
     gps.encode(Serial2.read());
