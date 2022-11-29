@@ -6,32 +6,32 @@
 #define BAUDRATE_SERIAL_GPS 9600
 #define LED_BUILTIN 2
 
-#define TEMPO_LEITURA_SERIAL_GPS 2000
+#define TIME_READING_SERIAL_GPS 2000
 #define BAUDRATE_SERIAL_DEBUG 115200
 
-typedef struct TPosicao_GPS
+typedef struct TPosition_GPS
 {
   float latitude;
   float longitude;
   float altitude;
-  float velocidade;
-  int numeroSatelites;
-  int segundo;
-  int minuto;
-  int hora;
-  int dia;
-  int mes;
-  int ano;
+  float velocity;
+  int numberSatellites;
+  int second;
+  int minute;
+  int hour;
+  int day;
+  int month;
+  int year;
 };
 
 TinyGPSPlus gps;
 
 StaticJsonDocument<400> doc;
 
-TPosicao_GPS posicao_gps;
+TPosition_GPS position_gps;
 
-std::stringstream ss_data, ss_hora;
-std::string data, hora;
+std::stringstream ss_data, ss_hour;
+std::string data, hour;
 
 void castToSerial()
 {
@@ -41,50 +41,50 @@ void castToSerial()
 
 void convertDate()
 {
-  ss_data << posicao_gps.dia << "-" << posicao_gps.mes << "-" << posicao_gps.ano;
+  ss_data << position_gps.day << "-" << position_gps.month << "-" << position_gps.year;
   data = ss_data.str();
 }
 
- void convertHour()
+void convertHour()
 {
-  ss_hora << posicao_gps.hora << ":" << posicao_gps.minuto << ":" << posicao_gps.segundo;
-  hora = ss_hora.str();
+  ss_hour << position_gps.hour << ":" << position_gps.minute << ":" << position_gps.second;
+  hour = ss_hour.str();
 }
-static void convertToJson(TPosicao_GPS posicao_gps)
+static void convertToJson(TPosition_GPS position_gps)
 {
-  doc["latitude"] = posicao_gps.latitude;
-  doc["longitude"] = posicao_gps.longitude;
-  doc["altitude"] = posicao_gps.altitude;
-  doc["velocidade"] = posicao_gps.velocidade;
-  doc["numeroSatelites"] = posicao_gps.numeroSatelites;
+  doc["latitude"] = position_gps.latitude;
+  doc["longitude"] = position_gps.longitude;
+  doc["altitude"] = position_gps.altitude;
+  doc["velocidade"] = position_gps.velocity;
+  doc["numeroSatelites"] = position_gps.numberSatellites;
   convertDate();
   doc["data"] = data;
   convertHour();
-  doc["hora"] = hora;
+  doc["hora"] = hour;
 
   castToSerial();
 }
 
 void GPSRead()
 {
-  
+
   if (true) // if (gps.charsProcessed() > 10) quando gps estiver captando sinal
   {
     gps.encode(Serial2.read());
-    posicao_gps.latitude = gps.location.lat();
-    posicao_gps.longitude = gps.location.lng();
-    posicao_gps.altitude = gps.altitude.kilometers();
-    posicao_gps.velocidade = gps.speed.kmph();
-    posicao_gps.numeroSatelites = gps.satellites.value();
-    posicao_gps.ano = gps.date.year();
-    posicao_gps.mes = gps.date.month();
-    posicao_gps.dia = gps.date.day();
-    posicao_gps.hora = gps.time.hour();
-    posicao_gps.minuto = gps.time.minute();
-    posicao_gps.segundo = gps.time.second();
+    position_gps.latitude = gps.location.lat();
+    position_gps.longitude = gps.location.lng();
+    position_gps.altitude = gps.altitude.kilometers();
+    position_gps.velocity = gps.speed.kmph();
+    position_gps.numberSatellites = gps.satellites.value();
+    position_gps.year = gps.date.year();
+    position_gps.month = gps.date.month();
+    position_gps.day = gps.date.day();
+    position_gps.hour = gps.time.hour();
+    position_gps.minute = gps.time.minute();
+    position_gps.second = gps.time.second();
 
     digitalWrite(LED_BUILTIN, HIGH);
-    convertToJson(posicao_gps);
+    convertToJson(position_gps);
   }
   else
   {
@@ -106,5 +106,5 @@ void setup()
 void loop()
 {
   GPSRead();
-  delay(TEMPO_LEITURA_SERIAL_GPS);
+  delay(TIME_READING_SERIAL_GPS);
 }
