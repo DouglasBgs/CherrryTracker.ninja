@@ -5,7 +5,7 @@
 #include "SD_MMC.h"
 
 #define BAUDRATE_SERIAL_DEBUG 115200
-#define TEMPO_LEITURA_SERIAL 1000
+#define SERIAL_READING_TIME 1000
 
 int firstTime;
 long randomNumber;
@@ -34,20 +34,20 @@ void setup()
   init_tasks();
 }
 
-void CriarNomeArquivo()
+void CreateFileName()
 {
   randomNumber = rand() + millis();
   sprintf(fileName, "cherrytracker%d", randomNumber);
 }
 
-void iniciaGravacao()
+void startRecording()
 {
 
   if (firstTime == 0)
   {
     readJson();
     Serial.println("Iniciando a gravação");
-    CriarNomeArquivo();
+    CreateFileName();
     start_handler(fileName);
     sprintf(jsonName, "/%s.json", fileName);
     JSONfile = SD_MMC.open(jsonName, FILE_WRITE);
@@ -57,7 +57,7 @@ void iniciaGravacao()
   }
 }
 
-void finalizaGravacao()
+void endRecording()
 {
   if (firstTime == 1 && millis() > 25000)
   {
@@ -65,24 +65,24 @@ void finalizaGravacao()
     JSONfile.print("{}]");
     JSONfile.close();
     Serial.println("finalizando a gravação");
-    firstTime = 10;
+    firstTime = 2;
   }
 }
 
-void inicio()
+void start()
 {
 
   while (true)
   {
-    iniciaGravacao();
-    finalizaGravacao();
+    startRecording();
+    endRecording();
     readJson();
     WriteFile();
-    delay(TEMPO_LEITURA_SERIAL);
+    delay(SERIAL_READING_TIME);
   }
 }
 
 void loop()
 {
-  inicio();
+  start();
 }
