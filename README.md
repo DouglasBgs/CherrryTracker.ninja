@@ -159,7 +159,7 @@
 > > > - limitação dos últimos videos disponíveis para visualizar de acordo com a licença obtida.
 >>
 > > #### 5.4 Evidências de funcionamento
->>> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; É possível verificar na pasta [exemples](exemples) Alguns exemplos de funcionamento.
+>>> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; É possível verificar alguns exemplos de funcionamento na pasta [exemples](exemples).
 >>> - Json gerado pelo protótipo:
 >>>```json
 >>>[{"latitude":-26.34915543,"longitude":-48.80789185,"altitude":0.0132,"velocidade":6.96352005,"numeroSatelites":0,"data":"1-12-2022","hora":"19:4:21"},
