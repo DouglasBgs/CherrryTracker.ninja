@@ -160,5 +160,23 @@
 >>
 > > #### 5.4 Evidências de funcionamento
 >>> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; É possível verificar na pasta [exemples](exemples) Alguns exemplos de funcionamento.
+>>> - Json gerado pelo protótipo:
+>>>```json
+>>>[{"latitude":-26.34915543,"longitude":-48.80789185,"altitude":0.0132,"velocidade":6.96352005,"numeroSatelites":0,"data":"1-12-2022","hora":"19:4:21"},
+>>>{"latitude":-26.34915543,"longitude":-48.80789185,"altitude":0.0132,"velocidade":6.96352005,"numeroSatelites":0,"data":"1-12-2022","hora":"19:4:21"},
+>>>{"latitude":-26.34915543,"longitude":-48.80789185,"altitude":0.0132,"velocidade":6.96352005,"numeroSatelites":0,"data":"1-12-2022","hora":"19:4:21"},
+>>>{"latitude":-26.34915543,"longitude":-48.80789185,"altitude":0.0132,"velocidade":6.96352005,"numeroSatelites":0,"data":"1-12-2022","hora":"19:4:23"},
+>>>{"latitude":-26.34922791,"longitude":-48.80823135,"altitude":0.024,"velocidade":14.66784,"numeroSatelites":9,"data":"1-12-2022","hora":"19:4:25"},
+>>>{"latitude":-26.34914398,"longitude":-48.80832291,"altitude":0.0149,"velocidade":18.48295975,"numeroSatelites":9,"data":"1-12-2022","hora":"19:4:27"},
+>>>{"latitude":-26.34910965,"longitude":-48.80835342,"altitude":0.0149,"velocidade":18.72372055,"numeroSatelites":0,"data":"1-12-2022","hora":"19:4:30"},
+>>>{"latitude":-26.34910965,"longitude":-48.80835342,"altitude":0.0149,"velocidade":18.72372055,"numeroSatelites":0,"data":"1-12-2022","hora":"19:4:33"},
+>>>{"latitude":-26.34910965,"longitude":-48.80835342,"altitude":0.0149,"velocidade":18.72372055,"numeroSatelites":0,"data":"1-12-2022","hora":"19:4:35"},
+>>>{"latitude":-26.34910965,"longitude":-48.80835342,"altitude":0.0149,"velocidade":18.72372055,"numeroSatelites":0,"data":"1-12-2022","hora":"19:4:37"},
+>>>{}]
+>>>```
+>>> - Video gerado pelo protótipo:
+    [clique para visualizar](exemples/cherrytracker1481771691.avi)
+>>>
 
->> [exemplo](images/exemples/cherrytracker1481771443.json?raw=true)
+
+
