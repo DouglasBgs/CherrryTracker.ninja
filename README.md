@@ -26,6 +26,7 @@
     1. [**Principais Dificuldades**](#51-principais-dificuldades)
     2. [**Aprendizados Obtidos**](#52-aprendizados-obtidos)
     3. [**RoadMap**](#53-roadmap)
+    4. [**Evidências de funcionamento**](#54-evidências-de-funcionamento)
 
 ##
 
@@ -147,6 +148,7 @@
 > > #### 5.2 Aprendizados Obtidos
 > >
 > > > &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Embora este projeto tenha sido muito desafiador em vários aspectos, muitos destes desafios foram concluídos através dos aprendizados obtidos durante o desenvolvimento deste projeto, com isso destaca-se os principais aprendizados obtidos, como a utilização do _github actions_, que é uma ferramenta muito poderosa para a geração e controle de workflows, possibilitando a implementação de CI/CD entre outras atividades.
+>>>
 > > > &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; O manuseio e instalação de microcontroladores utilizados no decorrer do processo de desenvolvimento, tanto no que diz respeito a ligações entre hardwares quanto a comunicação entre os softwares desenvolvidos ou utilizados pelo sistema.
 > >
 > > #### 5.3 RoadMap
@@ -155,3 +157,8 @@
 > > > - Modularizar o sistema criando determinadas funcionalidades extras como, como a armazenagem de dados na nuvem.
 > > > - Acompanhamento dos dados em tempo real.
 > > > - limitação dos últimos videos disponíveis para visualizar de acordo com a licença obtida.
+>>
+> > #### 5.4 Evidências de funcionamento
+>>> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; É possível verificar na pasta [exemples](exemples) Alguns exemplos de funcionamento.
+
+>> [exemplo](images/exemples/cherrytracker1481771443.json?raw=true)
